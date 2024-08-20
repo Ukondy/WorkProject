@@ -1,0 +1,31 @@
+# Общие файлы
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Для Windows
+Thumbs.db
+Desktop.ini
+
+# IDE и редакторы
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.class
+target/
+*.log
+
+# Другие специфичные файлы
+*.env
+*.env.local
