@@ -22,7 +22,12 @@ Desktop.ini
 *.war
 *.ear
 target/
+build/
+.mvn/
+.allure/
 
 # Другие специфичные файлы
 *.env
 *.env.local
+mvnw
+mvnw.cmd
