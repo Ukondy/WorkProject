@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" minHeight="740.0" minWidth="780.0" styleClass="bg-main" stylesheets="@../style.css" xmlns="http://javafx.com" xmlns:fx="http://javafx.com" fx:controller="com.ukondy.on_site.OnSiteController">
+    <children>
+        <!-- Убраны layoutX, layoutY и prefWidth. Привязка идет строго по AnchorPane-анкорам на 35 пикселей от каждого края окна -->
+        <VBox styleClass="app-container" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="35.0">
+            <children>
+
+                <!-- Верхняя навигация (Меню) — Полностью адаптивная -->
+                <HBox alignment="CENTER_LEFT" prefHeight="40.0" maxWidth="1.7976931348623157E308" styleClass="nav-menu">
+                    <children>
+                        <!-- Левая группа кнопок навигации -->
+                        <HBox alignment="CENTER_LEFT" spacing="24.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#handleDefaultSettings" styleClass="nav-item" text="Настройки" />
+                                <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#openTutorial" styleClass="nav-item" text="Помощь" />
+                            </children>
+                        </HBox>
+                        <!-- Правая кнопка, автоматически прижимающаяся к правому краю -->
+                        <Button fx:id="btnExit" mnemonicParsing="false" onAction="#handleExit" styleClass="nav-item, btn-exit" text="Выход" alignment="CENTER_RIGHT" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="32.0" />
+                    </VBox.margin>
+                </HBox>
+
+                <!-- Заголовок приложения -->
+                <VBox spacing="8.0" styleClass="header">
+                    <children>
+                        <Label styleClass="header-title" text="Загрузчик изображений" />
+                        <Label styleClass="header-subtitle" text="Скачивайте медиаконтент с сайтов в удобном формате" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="32.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <!-- Форма ввода -->
+                <VBox spacing="24.0" VBox.vgrow="ALWAYS">
+                    <children>
+
+                        <!-- Режим работы (Сегментированный переключатель) -->
+                        <VBox spacing="10.0" styleClass="form-group">
+                            <children>
+                                <Label styleClass="form-label" text="Режим загрузки:" />
+                                <HBox maxWidth="1.7976931348623157E308" prefHeight="46.0" styleClass="segmented-control">
+                                    <children>
+                                        <RadioButton fx:id="modeSite" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="segment-option" text="С сайта" HBox.hgrow="ALWAYS">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="modeGroup" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <RadioButton fx:id="modeCustom" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToCustomMode" styleClass="segment-option" text="Кастомный" toggleGroup="$modeGroup" HBox.hgrow="ALWAYS" />
+                                        <RadioButton fx:id="modePhoto" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToPhotoMode" styleClass="segment-option" text="Фото" toggleGroup="$modeGroup" HBox.hgrow="ALWAYS" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Ссылка на страницу -->
+                        <VBox spacing="10.0" styleClass="form-group" alignment="TOP_LEFT">
+                            <children>
+                                <Label styleClass="form-label" text="Ссылка на главу или страницу:" />
+                                <!-- Поле ввода ссылки -->
+                                <TextField fx:id="inputUrl" maxWidth="1.7976931348623157E308" promptText="https://example.com..." styleClass="text-input" />
+                                <!-- Скрытая по умолчанию надпись об ошибке -->
+                                <Label fx:id="lblUrlError" managed="false" visible="false" text="Введите корректную ссылку, например: https://example.com" style="-fx-text-fill: #ff453a; -fx-font-size: 13px; -fx-padding: 2px 0 0 4px;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Выбор источника -->
+                        <VBox spacing="10.0" styleClass="form-group">
+                            <children>
+                                <Label styleClass="form-label" text="Выберите сайт-источник:" />
+                                <ComboBox fx:id="comboSource" maxWidth="1.7976931348623157E308" prefHeight="46.0" promptText="Выберите источник..." styleClass="combo-box" />
+                            </children>
+                        </VBox>
+
+                        <!-- Преобразование (Сегментированный переключатель) -->
+                        <VBox spacing="10.0" styleClass="form-group">
+                            <children>
+                                <Label styleClass="form-label" text="Преобразовать в:" />
+                                <HBox maxWidth="1.7976931348623157E308" prefHeight="46.0" styleClass="segmented-control">
+                                    <children>
+                                        <RadioButton fx:id="formatPng" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="segment-option" text="Большое фото (PNG)" HBox.hgrow="ALWAYS">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="formatGroup" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <RadioButton fx:id="formatPdf" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="segment-option" text="PDF документ" toggleGroup="$formatGroup" HBox.hgrow="ALWAYS" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Путь сохранения -->
+                        <VBox spacing="10.0" styleClass="form-group" alignment="TOP_LEFT">
+                            <children>
+                                <Label styleClass="form-label" text="Куда сохранить созданный файл:" />
+                                <HBox spacing="10.0" maxWidth="1.7976931348623157E308">
+                                    <children>
+                                        <!-- Текстовое поле теперь занимает всю доступную ширину строки -->
+                                        <TextField fx:id="inputSavePath" editable="false" maxWidth="1.7976931348623157E308" promptText="Выберите папку для сохранения..." styleClass="text-input" text="C:/Downloads/ParserOutput" HBox.hgrow="ALWAYS" />
+                                        <!-- Новая стильная кнопка проводника -->
+                                        <Button fx:id="btnBrowse" mnemonicParsing="false" onAction="#handleBrowseFolder" prefHeight="46.0" prefWidth="54.0" styleClass="btn-secondary" text="📂" style="-fx-font-size: 16px; -fx-cursor: hand;" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- Кнопка действия -->
+                <Button fx:id="btnExecute" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleExecute" prefHeight="54.0" styleClass="submit-btn" text="ВЫПОЛНИТЬ">
+                    <VBox.margin>
+                        <Insets top="12.0" />
+                    </VBox.margin>
+                </Button>
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
