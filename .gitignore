@@ -8,7 +8,6 @@
 Thumbs.db
 
 # Для Windows
-Thumbs.db
 Desktop.ini
 
 # IDE и редакторы
@@ -22,9 +21,7 @@ Desktop.ini
 *.jar
 *.war
 *.ear
-*.class
 target/
-*.log
 
 # Другие специфичные файлы
 *.env
